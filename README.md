@@ -26,3 +26,21 @@ npm run preview
 
 Notes
 - Click the `+` on a day to add an event (simple prompt). Events persist in the browser's `localStorage` under the key `calendar-events-v1`.
+# DockerNodeApp
+Single Repository for all of my Docker Images
+
+Docker image
+
+Build the production image (from project root):
+
+```bash
+docker build -t docker-node-app-calendar:latest .
+```
+
+Run the container (map port 8080 to container 80):
+
+```bash
+docker run -it --rm -p 8080:80 docker-node-app-calendar:latest
+```
+
+Then open http://localhost:8080 in your browser.
