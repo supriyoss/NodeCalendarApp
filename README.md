@@ -26,8 +26,6 @@ npm run preview
 
 Notes
 - Click the `+` on a day to add an event (simple prompt). Events persist in the browser's `localStorage` under the key `calendar-events-v1`.
-# DockerNodeApp
-Single Repository for all of my Docker Images
 
 Docker image
 
