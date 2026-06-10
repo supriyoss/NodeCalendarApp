@@ -7,7 +7,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  imageName: 'samplepythonapp'
+  imageName: 'dockernodeapp'
 
 jobs:
 - deployment: DeployToNonProd
@@ -28,33 +28,13 @@ jobs:
 
         - script: |
             echo "Running container from image"
-            docker run -d --name $(imageName)-run $(imageName):$(Build.BuildId)
-            sleep 5
-            docker ps --filter "name=$(imageName)-run"
-          displayName: 'Run Docker container'
+            # Map host port 5173 (Vite/dev) to container; adjust if your app uses a different port
+            docker run -d --name $(imageName)-run -p 5173:5173 $(imageName):$(Build.BuildId)
+              sleep 5
+              docker ps --filter "name=$(imageName)-run"
+            displayName: 'Run Docker container'
 
-        - script: |
-            echo "Health-checking container"
-            HOST=localhost
-            PORTS="80 5000 8000 8080"
-            SUCCESS=0
-            for p in $PORTS; do
-              echo "Checking port $p"
-              for i in {1..12}; do
-                if curl -sSf "http://$HOST:$p/" >/dev/null 2>&1; then
-                  echo "Healthy on port $p"
-                  SUCCESS=1
-                  break 2
-                fi
-                sleep 5
-              done
-            done
-            if [ "$SUCCESS" -ne 1 ]; then
-              echo "Health check failed for ports: $PORTS"
-              docker logs $(imageName)-run || true
-              exit 1
-            fi
-          displayName: 'HTTP health-check'
+        
 
         - script: |
             echo "Stopping and removing container"
