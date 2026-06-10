@@ -32,7 +32,7 @@ jobs:
             docker run -d --name $(imageName)-run -p 5173:5173 $(imageName):$(Build.BuildId)
               sleep 5
               docker ps --filter "name=$(imageName)-run"
-            displayName: 'Run Docker container'
+          displayName: 'Run Docker container'
 
         
 
