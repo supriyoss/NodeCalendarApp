@@ -3,7 +3,6 @@ pr: none
 
 pool:
   name: MyAgentPool
-  demands: Agent.Name -equals ADOagent1
 
 variables:
   imageName: 'dockernodeapp'
