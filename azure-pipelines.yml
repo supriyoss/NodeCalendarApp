@@ -2,7 +2,8 @@ trigger: none
 pr: none
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: MyAgentPool
+  demands: Agent.Name -equals ADOagent1
 
 variables:
   imageName: 'dockernodeapp'
