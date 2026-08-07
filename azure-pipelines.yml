@@ -12,8 +12,6 @@ jobs:
 - deployment: DeployToNonProd
   displayName: 'Deploy to non-prod environment'
   environment: 'non-prod'
-  pool:
-    vmImage: 'ubuntu-latest'
   strategy:
     runOnce:
       deploy:
